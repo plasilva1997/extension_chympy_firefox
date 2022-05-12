@@ -1,1 +1,1 @@
-# extension_chympy_firefox
+# extension_chympy
