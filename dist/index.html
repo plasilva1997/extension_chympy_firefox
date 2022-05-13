@@ -8,11 +8,21 @@
   </head>
   <body>
     <div class="container">
-      <!-- <div class="logo"></div> -->
+      <div id="loading">
+        <div class="item">
+          <i class="loader --1"></i>
+        </div>
+      </div>
+      <div class="logo"></div>
 
-      <form class="form" method="post" action="" onsubmit="return false">
+      <form class="form" method="post" >
         <input type="email" name="email" id="email" placeholder="Email" />
-        <input type="password" name="password" id="password" placeholder="Password" />
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Password"
+        />
         <button name="submitted" id="submitted" type="button">
           Se connecter
         </button>
