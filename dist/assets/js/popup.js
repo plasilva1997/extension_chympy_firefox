@@ -25,8 +25,9 @@ function login() {
 
         // Stock le token en cache
         localStorage.setItem("token", data.token);
-    }).then(function () {
-        window.location.replace("infos");// redirection vers le dashboard
+    })
+    .then(function () {
+        window.location.replace("infos.html");// redirection vers le dashboard
     });
 
 }
