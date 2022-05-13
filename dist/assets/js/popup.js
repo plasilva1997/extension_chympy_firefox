@@ -56,7 +56,14 @@ function login() {
     }).catch((error) => {
         errorMessageDiv.innerHTML = "Une erreur s'est produites veuillez rééssayer";
         loading.style.display = "none"; //cache le loader
-    });
+        console.log(data)
+
+        // Stock le token en cache
+        localStorage.setItem("token", data.token);
+    })
+        .then(function () {
+            window.location.replace("infos.html");// redirection vers le dashboard
+        });
 
     loading.style.display = "flex"; //Affiche le loader
 }
