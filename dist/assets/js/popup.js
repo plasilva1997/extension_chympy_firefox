@@ -1,5 +1,4 @@
 //Appel la fonction login au clique sur le bouton submit
-document.getElementById("submit").addEventListener("click", login);
 
 function login() {
     // Email de l'utilisateur
@@ -8,22 +7,31 @@ function login() {
     var password = document.getElementById("password").value;
 
     // Requête la route de login de l'api chympy
-    fetch("https://chympy.net/api/particuliers/login", {
+    return fetch("https://chympy.net/api/particuliers/login", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         },
         body: JSON.stringify({
             email: login,
             password: password
         })
     }).then(function (response) {
+        console.log(response);
         // Formatte la response en json
         return response.json();
     }).then(function (data) {
+        console.log(data)
+
         // Stock le token en cache
         localStorage.setItem("token", data.token);
     }).then(function () {
         window.location.replace("infos");// redirection vers le dashboard
     });
+
 }
+
+document.getElementById("submitted").addEventListener("click", function (e) {
+    e.preventDefault();
+    login();
+});
