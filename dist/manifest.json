@@ -3,12 +3,18 @@
   "name": "Chympy",
   "version": "0.1.0",
   "description": "EXtension navigateur firefox de l'application Chympy.",
-  "permissions": ["all_urls"],
+  "permissions": ["<all_urls>"],
   "browser_action": { "default_popup": "index.html" },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "addon@example.com",
+      "strict_min_version": "42.0"
+    }
+  },
   "content_scripts": [
     {
       "matches": ["*://*.mozilla.org/*"],
-      "js": ["main.js"]
+      "js": ["popup.js"]
     }
   ]
 }
