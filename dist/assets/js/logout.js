@@ -1,8 +1,8 @@
 document.getElementById("logout").addEventListener("click", logout); //Ajoute la fonction au boutton logout
-function logout(){
+function logout() {
     console.log("logout");
-    chrome.storage.local.clear(function() {
-        var error = chrome.runtime.lastError;
+    localStorage.clear(function () {
+        var error = "";
         if (error) {
             console.error(error);
         }
