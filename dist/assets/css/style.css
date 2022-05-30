@@ -4,7 +4,7 @@
 
 body {
     overflow: hidden;
-    background-color: #fafafa;
+    background-color: #fefefe;
 }
 .logo{
     background-image: url("../img/logo.png");
@@ -32,10 +32,10 @@ input[type=email], input[type=password] {
     border: 1px solid var(--color-primary);
     border-radius: 4px;
     background: none;
-    color: var(--color-primary);
+    color: #333;
 }
 input[type=email]::placeholder, input[type=password]::placeholder {
-    color: var(--color-primary);
+    color: #333
 }
 input[type=email]:focus, input[type=password]:focus {
     border: 2px solid var(--color-primary);
@@ -164,8 +164,25 @@ a{
 
 /* Dashboard style */
 
+.navbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px 0px rgb(0 0 0 / 20%);
+    width: 100%;
+    margin-bottom: 25px;
+    height: 100px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
 .container__dashboard {
-    width: 400px;
+    width: 450px;
     height: auto;
     min-height: 20vh;
     display: flex;
@@ -179,9 +196,10 @@ a{
     justify-content: center;
     align-items: center;
     width: 90%;
+    margin-top: 125px;
 }
 
-.grid__paterns{
+#grid__paterns{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
@@ -190,14 +208,29 @@ a{
     overflow-y: auto;
     overflow-x: hidden;
     justify-items: center;
+    text-align: center;
+}
+#grid__paterns a {
+    color: var(--color-primary);
+    text-decoration: none;
+    background-color: white;
+    width: 98%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 2px solid var(--color-primary);
+    border-radius: 5px;
+
 }
 
-.paterns {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
+#grid__paterns a:hover{
+    background-color: var(--color-primary);
+    color: #fff;
+    transition: 0.3s ease-in-out;
 }
+
 .patern{
     display: flex;
     width: 95%;
@@ -216,7 +249,7 @@ a{
     cursor: pointer;
 }
 
-.infos{
+#infos{
     display: flex;
 }
 .horaires{
@@ -224,4 +257,126 @@ a{
 }
 .infosPhone{
     width: 50%;
+}
+.lgNav{
+    width: 160px;
+    margin-left: 20px;
+}
+.linkAbout{
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 20px;
+}
+.partenaires{
+    width: 100%;
+    height: 100px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.partenaire{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    margin: 0 auto;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    justify-items: center;
+    text-align: center;
+
+}
+
+.allPartenaires{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-primary);
+    width: 100%;
+    margin: 50px 0;
+}
+
+
+.aboutApp{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-primary);
+    width: 100%;
+    margin: 50px 0;
+}
+
+.aboutApp p {
+    color: black;
+}
+.title{
+    color: var(--color-primary);
+}
+
+
+.infosUtils h2,
+.infosUtils h3{
+    color: var(--color-primary);
+}
+
+
+.infosUtils h3{
+    margin-top: 20px;
+    font-size: 1.2rem;
+}
+
+.fs-08rem {
+    font-size: 0.8rem;
+}
+
+
+.open{
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: green;
+    animation: isOpen 2s ease-in-out infinite;
+}
+.closed{
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: red;
+}
+
+
+#name{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes isOpen {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.1;
+    }
+
+}
+
+.statusOpen p {
+    font-size: 0.8rem;
+}
+
+.statusOpen{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+
 }
