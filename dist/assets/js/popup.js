@@ -10,16 +10,14 @@
 
 const urlAPI = "https://chympy.net/api/";
 
-var token = "";
 
-firefox.storage.local.get(["token"], function (items) {
+const token = localStorage.getItem('token');
 
-    token = items.token;
-    if (token !== null && token !== undefined) {
-        window.location.replace("./dashboard.html"); //redirige vers le dashboard si le token de connexion est toujours actif
-    }
+if (token !== null) {
+    window.location.replace("dashboard.html"); //redirige vers le dashboard si le token de connexion est toujours actif
+}
 
-});
+
 
 document.getElementById("submit").addEventListener("click", login); //Ajoute la fonction au boutton submit
 
@@ -46,50 +44,43 @@ function login() {
         return response.json(); //recuperation du json
     }).then(function (data) {
         if (data['success'] !== false) {
-            chrome.storage.local.set({ token: data['token'] }, function () { });
+            localStorage.setItem('token', data['token']);
             form.style.display = "none"; //Cache le login si on est connecté
-            getCompany();
+            // getCompany();
         } else {
             errorMessageDiv.innerHTML = "Une erreur s'est produites veuillez rééssayer";
             loading.style.display = "none"; //cache le loader
         }
     }).catch((error) => {
-        errorMessageDiv.innerHTML = "Une erreur s'est produites veuillez rééssayer";
+        // errorMessageDiv.innerHTML = "Une erreur s'est produites veuillez rééssayer";
         loading.style.display = "none"; //cache le loader
-        console.log(data)
-
-        // Stock le token en cache
-        localStorage.setItem("token", data.token);
-    })
-        .then(function () {
-            window.location.replace("infos.html");// redirection vers le dashboard
-        });
+    }).then(window.location.replace("dashboard.html"))
 
     loading.style.display = "flex"; //Affiche le loader
 }
 
 
-function getCompany() {
+// function getCompany() {
 
-    chrome.storage.local.get(["token"], function (items) {
+//     localStorage.getItem(["token"], function (items) {
 
-        token = items.token;
-        if (token !== null && token !== undefined) {
-            fetch(urlAPI + "offres/find", { //requete avec les données
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Autorization": "Bearer " + token
-                },
-            }).then(function (response) {
-                return response.json(); //recuperation du json
-            }).then(function (data) {
-                chrome.storage.local.set({ company: JSON.stringify(data) }, function () { });
-                window.location.replace("./dashboard.html");// redirection vers le dashboard
-            }).catch((error) => {
-                errorMessageDiv.innerHTML = "Une erreur s'est produites veuillez rééssayer";
-                loading.style.display = "none"; //cache le loader
-            });
-        }
-    });
-}
+//         token = items.token;
+//         if (token !== null && token !== undefined) {
+//             fetch(urlAPI + "offres/find", { //requete avec les données
+//                 method: "GET",
+//                 headers: {
+//                     "Content-Type": "application/json",
+//                     "Autorization": "Bearer " + token
+//                 },
+//             }).then(function (response) {
+//                 return response.json(); //recuperation du json
+//             }).then(function (data) {
+//                 localStorage.setItem({ company: JSON.stringify(data) }, function () { });
+//                 window.location.replace("./dashboard.html");// redirection vers le dashboard
+//             }).catch((error) => {
+//                 errorMessageDiv.innerHTML = "Une erreur s'est produites veuillez rééssayer";
+//                 loading.style.display = "none"; //cache le loader
+//             });
+//         }
+//     });
+// }
