@@ -1,71 +1,44 @@
+<!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="assets/css/style.css" />
-  </head>
-  <body>
-    <div class="container__dashboard">
-      <div class="contain">
-        <div class="logo"></div>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
 
-        <div class="infosCompany">
-          <h1>Chympy</h1>
-          <div class="infos">
-            <div class="horaires">
-              <p>lundi : 9h - 12h</p>
-              <p>mardi : 9h - 12h</p>
-              <p>mercredi : 9h - 12h</p>
-              <p>jeudi : 9h - 12h</p>
-              <p>vendredi : 9h - 12h</p>
-              <p>samedi : 9h - 12h</p>
-              <p>dimanche : Fermé</p>
-            </div>
-            <div class="infosPhone">
-              <p>Tel : +33 (0)1 23 45 67 89</p>
-              <p>Adresse: 1 rue de la paix, 75007 Paris</p>
-              <div class="imageCompany"></div>
-            </div>
-          </div>
+<div class="container__dashboard">
+  <div class="navbar">
+    <div class="logo lgNav"></div>
+    <a href="about.html" class="linkAbout">A propos</a>
+  </div>
+  <div class="contain">
+
+    <div id="infosCompany">
+      <div id="infos">
+        <div id="horaires">
+
         </div>
-        <div class="paterns">
-          <h2>Nos partenaires</h2>
-          <div class="grid__paterns">
-            <a href="#" target="_blank" class="patern">
-              <h3>Chympy</h3>
-            </a>
 
-            <a href="#" target="_blank" class="patern">
-              <h3>Chympy</h3>
-            </a>
+        <div id="infosPhone">
 
-            <a href="#" target="_blank" class="patern">
-              <h3>Chympy</h3>
-            </a>
-
-            <a href="#" target="_blank" class="patern">
-              <h3>Chympy</h3>
-            </a>
-
-            <a href="#" target="_blank" class="patern">
-              <h3>Chympy</h3>
-            </a>
-
-            <a href="#" target="_blank" class="patern">
-              <h3>Chympy</h3>
-            </a>
-
-            <a href="#" target="_blank" class="patern">
-              <h3>Chympy</h3>
-            </a>
-
-            <a href="#" target="_blank" class="patern">
-              <h3>Chympy</h3>
-            </a>
-          </div>
         </div>
-        <input type="submit" name="submit" id="logout" value="Se deconnecter" />
+      </div>
+
+    </div>
+    <div class="btnChoice">
+      <div id="activeOne" class="categorySame d-none">Partenaires similaire</div>
+      <div id="activeTwo" class="allPaterns active">Nos partenaires</div>
+    </div>
+    <div class="paterns">
+      <div id="grid__paterns1" class="grid__paterns1 d-none"></div>
+      <div id="grid__paterns" class="grid__paterns">
       </div>
     </div>
-    <script src="assets/js/logout.js"></script>
-  </body>
+    <input type="submit" name="submit" id="logout" value="Se deconnecter"/>
+  </div>
+</div>
+<script type="application/javascript" src="../node_modules/webextension-polyfill/dist/browser-polyfill.min.js"></script>
+<script src="assets/js/dashboard.js"></script>
+<script src="assets/js/logout.js"></script>
+</body>
 </html>

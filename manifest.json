@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+  "name": "Chympy",
+  "version": "0.1.0",
+  "permissions": ["activeTab","tabs","storage"],
+  "browser_action": {"default_popup": "dist/index.html"},
+  "background": {
+    "scripts": [
+      "browser-polyfill.js"
+    ]
+  },
+  "content_scripts":[{
+    "matches": ["https://*/*"],
+    "js": ["dist/assets/js/background.js"]
+  }],
+  "icons": {
+    "64" : "dist/assets/img/on.png"
+  },
+  "content_security_policy":"script-src 'self' 'unsafe eval'  https://apis.google.com/js/client.js?; object-src 'self'"
+}
