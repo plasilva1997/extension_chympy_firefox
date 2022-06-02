@@ -4,14 +4,22 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body class="">
+<div class="navbar">
+  <div class="logo lgNav"></div>
+  <div class="nav2">
+    <div id="darkmode"></div>
+  </div>
+
+
+</div>
 <div class="container">
   <div id="loading">
     <div class="item">
       <i class="loader --1"></i>
     </div>
   </div>
-  <div class="logo"></div>
+
 
   <div class="form" id="form-login">
     <input type="email" name="email" id="email" placeholder="Email"/>
@@ -21,7 +29,9 @@
     <p>Vous n'avez pas de compte ? <a href="https://www.chympy.net/register" target="_blank">Clique ici</a></p>
   </div>
 </div>
-<script type="application/javascript" src="../node_modules/webextension-polyfill/dist/browser-polyfill.min.js"></script>
+
 <script src="assets/js/popup.js"></script>
+<script src="assets/js/darkmode.js"></script>
+
 </body>
 </html>

@@ -1,15 +1,20 @@
-<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body class="">
 
 <div class="container__dashboard">
   <div class="navbar">
     <div class="logo lgNav"></div>
-    <a href="about.html" class="linkAbout">A propos</a>
+    <div class="nav2">
+      <a href="about.html" class="linkAbout">À propos</a>
+      <div id="darkmode"></div>
+      <div id="logout" class="logout-action"></div>
+    </div>
+
+
   </div>
   <div class="contain">
 
@@ -34,11 +39,9 @@
       <div id="grid__paterns" class="grid__paterns">
       </div>
     </div>
-    <input type="submit" name="submit" id="logout" value="Se deconnecter"/>
   </div>
 </div>
-<script type="application/javascript" src="../node_modules/webextension-polyfill/dist/browser-polyfill.min.js"></script>
-<script src="assets/js/dashboard.js"></script>
 <script src="assets/js/logout.js"></script>
+<script src="assets/js/darkmode.js"></script>
 </body>
 </html>

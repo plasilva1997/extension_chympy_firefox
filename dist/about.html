@@ -5,11 +5,17 @@
 
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body class="">
 <div class="container__dashboard">
     <div class="navbar">
         <div class="logo lgNav"></div>
-        <a href="dashboard.html" class="linkAbout">Accueil</a>
+        <div class="nav2">
+            <a href="dashboard.html" class="linkAbout">Accueil</a>
+            <div id="darkmode"></div>
+            <div id="logout" class="logout-action"></div>
+        </div>
+
+
     </div>
 
     <div class="contain">
@@ -28,18 +34,24 @@
         <div class="allPartenaires">
             <h2>Ils nous font confiance</h2>
             <div class="partenaire">
-                <div class="partenaires" style="background-image: url(https://www.chympy.net/assets/img/rouenshopping.png )"></div>
-                <div class="partenaires" style="background-image: url(https://www.chympy.net/assets/img/logo-credit-mutuel.png)"></div>
-                <div class="partenaires" style="background-image: url(https://www.chympy.net/assets/img/logo-site-ptits-doudous.gif)"></div>
-                <div class="partenaires" style="background-image: url(https://www.chympy.net/assets/img/logo_adnormandie.png)"></div>
-                <div class="partenaires" style="background-image: url(https://www.chympy.net/assets/img/logo_neomabs.svg)"></div>
+                <div class="partenaires"
+                     style="background-image: url(https://www.chympy.net/assets/img/rouenshopping.png )"></div>
+                <div class="partenaires"
+                     style="background-image: url(https://www.chympy.net/assets/img/logo-credit-mutuel.png)"></div>
+                <div class="partenaires"
+                     style="background-image: url(https://www.chympy.net/assets/img/logo-site-ptits-doudous.gif)"></div>
+                <div class="partenaires"
+                     style="background-image: url(https://www.chympy.net/assets/img/logo_adnormandie.png)"></div>
+                <div class="partenaires"
+                     style="background-image: url(https://www.chympy.net/assets/img/logo_neomabs.svg)"></div>
             </div>
         </div>
 
 
         <div class="aboutApp">
             <h2>A propos de l'extension</h2>
-            <p>Cette extension à été réalisé par des etudiants en 3eme année Bachelor Informatique chez <a href="https://www.needfor-school.com/" target="_blank">NEED FOR SCHOOL</a> à Rouen</p>
+            <p>Cette extension à été réalisé par des etudiants en 3eme année Bachelor Informatique chez <a
+                    href="https://www.needfor-school.com/" target="_blank">NEED FOR SCHOOL</a> à Rouen</p>
         </div>
 
         <div class="infosUtils">
@@ -47,12 +59,15 @@
             <!-- cgu -->
             <div class="cgu">
                 <h3>Conditions générales d'utilisation</h3>
-                <p class="fs-08rem">L'utilisation de l'application Chympy est soumise à l'acceptation de <a href="https://www.chympy.net/cgu" target="_blank">ces conditions générales d'utilisation</a>.</p>
+                <p class="fs-08rem">L'utilisation de l'application Chympy est soumise à l'acceptation de <a
+                        href="https://www.chympy.net/cgu" target="_blank">ces conditions générales d'utilisation</a>.
+                </p>
             </div>
             <!-- mentions légales -->
             <div class="mentions">
                 <h3>Mentions légales</h3>
-                <p class="fs-08rem">L'application Chympy est soumise à l'acceptation de <a href="https://www.chympy.net/mentions" target="_blank">ces mentions légales</a>.</p>
+                <p class="fs-08rem">L'application Chympy est soumise à l'acceptation de <a
+                        href="https://www.chympy.net/mentions" target="_blank">ces mentions légales</a>.</p>
             </div>
             <!-- faq -->
             <div class="faq">
@@ -62,11 +77,14 @@
             <!-- contact -->
             <div class="contact">
                 <h3>Contact</h3>
-                <p class="fs-08rem">Si vous ne trouvez pas reponse a vos questions, n'hésitez pas à nous contacter à l'adresse <a href="mailto:contact@chympy.com">contact@chympy.com</a></p>
+                <p class="fs-08rem">Si vous ne trouvez pas reponse a vos questions, n'hésitez pas à nous contacter à
+                    l'adresse <a href="mailto:contact@chympy.com">contact@chympy.com</a></p>
             </div>
         </div>
     </div>
 </div>
-</div>
+<script src="assets/js/logout.js"></script>
+<script src="assets/js/darkmode.js"></script>
+
 </body>
 </html>
