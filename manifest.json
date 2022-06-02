@@ -1,6 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Chympy",
+  "description": "Consommez local et récupérez une partie de vos dépenses directement sur votre compte ! Gagnez en pouvoir d'achat en soutenant l’emploi et l’économie locale",
   "version": "0.1.0",
   "permissions": ["activeTab","tabs","storage"],
   "browser_action": {"default_popup": "dist/index.html"},
@@ -11,7 +12,7 @@
     ]
   },
   "content_scripts":[{
-    "matches": ["https://*/*"],
+    "matches": ["https://*/*", "http://*/*"],
     "js": ["dist/assets/js/background.js", "dist/assets/js/notification.js"]
   }],
   "icons": {

@@ -2,7 +2,7 @@
 
 function notification(onCheck){
 
-    chrome.storage.local.get(["token","company"], function(items) {
+    browser.storage.local.get(["token","company"], function(items) {
 
             token = items.token;
 
@@ -23,25 +23,45 @@ function notification(onCheck){
                 }).then(function (data) {
 
                     if (countCurrentCompany !== data.length) {
-                        chrome.browserAction.setBadgeText({
-                            text: (data.length - countCurrentCompany).toString()
+
+                        browser.runtime.sendMessage({
+                            action: 'updateBadge',
+                            value: false
                         });
+
+                        browser.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
+                            if (msg.action === "updateBadge") {
+                                browser.browserAction.setBadgeText({
+                                    text: (data.length - countCurrentCompany).toString()
+                                });
+                            }
+                        });
+
                     } else {
-                        chrome.browserAction.setBadgeText({
-                            text: ""
+                        browser.runtime.sendMessage({
+                            action: 'deleteBadge',
+                            value: false
+                        });
+
+                        browser.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
+                            if (msg.action === "deleteBadge") {
+                                browser.browserAction.setBadgeText({
+                                    text: ""
+                                });
+                            }
                         });
 
                     }
 
                     if(onCheck){
-                        chrome.storage.local.set({company: JSON.stringify(data)}, function() {});
+                        browser.storage.local.set({company: JSON.stringify(data)}, function() {});
                     }
 
                 }).catch((error) => { //si il y a une erreur on redirige vers la page d'accueil
                     console.log(error)
                 });
             } else {
-                chrome.browserAction.setBadgeText({
+                browser.browserAction.setBadgeText({
                     text: ""
                 });
             }
