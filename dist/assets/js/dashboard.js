@@ -40,9 +40,12 @@ function setInformationCompany(company, url) {
     let currentDayName = new Date().toLocaleDateString("en-EN", {weekday: 'long'}).toLowerCase();
 
     let gridPattern = document.querySelector("#grid__paterns");
-
+    
+    let isNewOffers=false;
     let existCompany = false;
     let currentCompanyCategory = null;
+    let gridNewOffers=document.querySelector("#grid__newpattern");
+    let buttonNewOffers=document.querySelector("#activeThree");
 
     for (let k = 0; k < company.length; k++) {  //parcours le tableau de magasins
 
@@ -102,6 +105,16 @@ function setInformationCompany(company, url) {
                 if (company[k]['id_company']['id_category']['label'] === currentCompanyCategory && !url.includes(companyWebsite.replace(/\s/g, ''))) {//si la categorie du site client est egale a la catgeorie du site de la boucle alors ils font font partie de la meme categorie
                     gridSameCatgeory.innerHTML += "<a class='patern brown' id=" + idUrl + " href=" + companyWebsite + " target='_blank' class='patern'><h3>" + companyCommercial_name + "</h3></a>"; //ajout du nom du magasin dans la grid
                 }
+
+                const dateOffers = new Date(company[k]['id_company']['created_at']);
+                const dateOffersTimestamp = dateOffers.getTime();
+
+                if(parseInt(dateOffersTimestamp)>parseInt(lastConnexion)){
+                    gridNewOffers.classList.remove("d-none");
+                    buttonNewOffers.classList.remove("d-none");
+                    gridNewOffers.innerHTML += "<a class='patern brown' id=" + idUrl + " href=" + companyWebsite + " target='_blank' class='patern'><h3>" + companyCommercial_name + "</h3></a>"; //ajout du nom du magasin dans la grid
+                }
+
                 if (!companyWebsite.includes("https://")) {//format les url en https
                     companyWebsite = "https://" + companyWebsite
                 }
@@ -113,7 +126,6 @@ function setInformationCompany(company, url) {
             }
         }
     }
-
     return true;
 }
 
