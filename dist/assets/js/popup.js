@@ -103,14 +103,14 @@ function getCompany(){
         }
 }
 
-set_chrome_url();
+set_firefox_url();
 
-function set_chrome_url(){
+function set_firefox_url(){
     browser.tabs.query({active: true, lastFocusedWindow: true}, tabs => { //recupere l'url de la page actuelle
         if(tabs[0]!==null){ //si il y a une url
-            browser.storage.local.set({urlChrome: tabs[0].url}, function() {});//on stock l'url actuel
+            browser.storage.local.set({urlFirefox: tabs[0].url}, function() {});//on stock l'url actuel
         }else{ //sinon on stock une url par defaut
-            set_chrome_url();
+            set_firefox_url();
         }
     });
 }
