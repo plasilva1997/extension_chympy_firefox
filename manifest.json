@@ -6,12 +6,13 @@
   "browser_action": {"default_popup": "dist/index.html"},
   "background": {
     "scripts": [
-      "browser-polyfill.js"
+      "browser-polyfill.js",
+      "dist/assets/js/background.js","dist/assets/js/notification.js"
     ]
   },
   "content_scripts":[{
     "matches": ["https://*/*"],
-    "js": ["dist/assets/js/background.js"]
+    "js": ["dist/assets/js/background.js", "dist/assets/js/notification.js"]
   }],
   "icons": {
     "64" : "dist/assets/img/on.png"

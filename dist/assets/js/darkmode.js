@@ -11,7 +11,7 @@ function dark_mode() {
     } else {
         localStorage.setItem("darkMode", "false");
     }
-    setDarkmode();
+    setDarkmode(); //appel de la fonction setDarkmode
 }
 
 function setDarkmode() {
@@ -21,7 +21,6 @@ function setDarkmode() {
         darkMode.classList.remove("icon_off");
         darkMode.classList.add("icon_on");
         lougoutIcon.classList.remove("lougout-dm-actif");
-
 
     } else {
         document.body.classList.add("dark-mode");

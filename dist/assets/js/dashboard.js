@@ -2,6 +2,8 @@
 
 get_firefox_value();
 
+notification(true);
+
 let activeClass = document.getElementById("activeOne"); //on recupere la classe active
 activeClass.addEventListener("click", ActiveOne); //Ajoute la fonction au boutton submit
 
@@ -32,6 +34,8 @@ function ActiveTwo() {
 
 
 function setInformationCompany(company, url) {
+
+    chrome.browserAction.setIcon({path: '/dist/assets/img/on.png'});
 
     let currentDayName = new Date().toLocaleDateString("en-EN", {weekday: 'long'}).toLowerCase();
 
