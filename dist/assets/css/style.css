@@ -5,7 +5,7 @@
 
 
 body {
-    overflow-y: scroll;
+    overflow: hidden;
     background-color: #fefefe;
 }
 .logo{
@@ -520,7 +520,7 @@ a{
     align-items: start;
 }
 
-.nav2{
+.navBarNav{
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -532,7 +532,7 @@ a{
     -ms-flex-align: start;
     align-items: start;
     gap: 10px;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 @-webkit-keyframes isOpen {
@@ -716,6 +716,20 @@ body.dark-mode .container__dashboard .contain .paterns .grid__paterns .patern{
     background-color: transparent !important;
 }
 
+body.dark-mode .container__dashboard .contain .paterns .grid__paterns1 a{
+    border: #bd5800 solid 3px !important;
+}
+
+body.dark-mode .container__dashboard .contain .btnChoice .categorySame,
+body.dark-mode .container__dashboard .contain .btnChoice .allPaterns{
+    border: #bd5800 solid 3px !important;
+}
+
+body.dark-mode .container__dashboard .contain .btnChoice .active{
+    background-color: #bd5800 !important;
+}
+
+
 
 body.dark-mode .container__dashboard .contain .paterns .grid__paterns1 .patern:hover{
     background-color: #bd5800 !important;
@@ -767,4 +781,3 @@ body.dark-mode .form input[type=email]::placeholder, body.dark-mode .form input[
 body.dark-mode .form p {
     color: #fff;
 }
-
