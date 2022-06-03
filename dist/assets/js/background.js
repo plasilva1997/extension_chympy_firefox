@@ -1,24 +1,43 @@
 /*POUR LE DOM DE LA PAGE*/
 
-function get_firefox_value() {
+const urlAPI="https://chympy.net/api/";
 
-    let currentURL = window.location.href; //recupere l'url de la page
 
-    browser.storage.local.get(["company", "urlFirefox"], function (items) { //recupere les données stockées dans le local storage
 
-        if (items['urlFirefox'] !== null && items['urlFirefox'] !== undefined && currentURL === items['urlFirefox']) { //verifie si l'url de la page est la meme que celle stockée dans le local storage
-            setBanner(JSON.parse(items['company']), items['urlFirefox']); //appel de la fonction setBanner
-        } else {
-            browser.storage.local.set({urlFirefox: currentURL}, function () {
-            });//on stock l'url actuel
-            get_firefox_value();//fonction recurssive tant qu'on a pas l'url
+function get_chrome_value() {
+
+    let currentURL=window.location.href; //recupere l'url de la page
+
+    browser.storage.local.get(["company", "urlFirefox","token"], function (items) { //recupere les données stockées dans le local storage
+        if(items['token'] !== undefined) {
+
+            browser.runtime.sendMessage({
+                action: 'updateIcon',
+                value: false
+            });
+
+            browser.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
+                if (msg.action === "updateIcon") {
+                    browser.browserAction.setIcon({path: '/dist/assets/img/on.png'});
+                }
+            });
+
+            if (items['urlFirefox'] !== null && items['urlFirefox'] !== undefined && currentURL === items['urlFirefox']) { //verifie si l'url de la page est la meme que celle stockée dans le local storage
+                setBanner(JSON.parse(items['company']), items['urlFirefox']); //appel de la fonction setBanner
+            } else {
+                browser.storage.local.set({urlFirefox: currentURL}, function () {
+                });//on stock l'url actuel
+                get_chrome_value();//fonction recurssive tant qu'on a pas l'url
+            }
+        }else{
+            return;
         }
     });
 }
 
-get_firefox_value();
+get_chrome_value();
 
-function setBanner(company, url) {
+function setBanner(company,url){
 
     for (let k = 0; k < company.length; k++) { //parcours le tableau de la company
 
@@ -36,7 +55,7 @@ function setBanner(company, url) {
             if (companyWebsite !== null && companyWebsite !== "") {
 
 
-                if (url.includes(companyWebsite.replace(/\s/g, '')) && !url.includes("firefox.com")) { //verifie si l'url de la page contient le site web de la company
+                if (url.includes(companyWebsite.replace(/\s/g, '')) && !url.includes("google.com")) { //verifie si l'url de la page contient le site web de la company
 
                     let div = document.createElement("div"); //création d'une div
                     document.body.insertBefore(div, document.body.firstChild); //insertion de la div dans le body
@@ -50,11 +69,10 @@ function setBanner(company, url) {
                     }
 
                     div.id = 'extention_chympy_patern'; //ajout d'un id à la div
-                    div.innerHTML = '<style>.colorImportant{color: #fd9f57 !important;}' +
+                    div.innerHTML = '<style>.colorImportant{color: #FD9F57 !important;}' +
                         '</style><div style="z-index: 9999999999999; position: relative;width: 100%; border-bottom: #FD9F57 2px solid; height: auto; min-height: 5vh; color: white; background-color: #fafafa; display: flex; justify-content: space-around; align-content: center; align-items: center">' +
                         '<div style="background-repeat: no-repeat; background-size: contain; background-position: center;background-image: url(https://i.imgur.com/E2qN8Da.png); width: 150px; height: 100px"></div>' +
                         '<p style="color: #4b4b4b; font-size: 22px; font-weight: 700; margin: 0; width: 70%;line-height: 1.5em">Ce site est partenaire de Chympy, <span class="colorImportant">' + freeCondition + '</span> vous recuperez <span class="colorImportant">' + cashback + ' ' + unitCashback + '</span> en CashBack. <span class="colorImportant">' + freeConditonMinCashBack + '</span> (cliquer <a style="font-weight: 900; text-decoration: none; color: #FD9F57" href="https://www.chympy.net/cgu" target="_blank">ici</a> pour voir les conditions d\'utilisation)</p>' +
-                        '</div>' + //ajout d'un contenu à la div*
                         ' <div id="close" style="cursor: pointer;color: black; position: absolute; right: 25px; top: 25px; z-index: 999999999999; font-size: 3rem">x</div></div>'; //ajout du contenu de la div
 
                     document.getElementById('close').addEventListener('click', function () { //ajout d'un event listener sur la div
@@ -66,7 +84,6 @@ function setBanner(company, url) {
         }
     }
 }
-
 
 
 

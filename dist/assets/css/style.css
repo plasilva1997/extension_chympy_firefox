@@ -5,7 +5,7 @@
 
 
 body {
-    overflow-y: scroll;
+    overflow-x: hidden;
     background-color: #fefefe;
 }
 .logo{
@@ -152,7 +152,6 @@ a{
     display: none;
     position: absolute;
     z-index: 1;
-    background-color: rgb(255 255 255);
 }
 .item{
     display: -ms-grid;
@@ -520,7 +519,7 @@ a{
     align-items: start;
 }
 
-.nav2{
+.navBarNav{
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -532,7 +531,7 @@ a{
     -ms-flex-align: start;
     align-items: start;
     gap: 10px;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 @-webkit-keyframes isOpen {
@@ -715,6 +714,20 @@ body.dark-mode .container__dashboard .contain .paterns .grid__paterns .patern{
     color: #fff !important;
     background-color: transparent !important;
 }
+
+body.dark-mode .container__dashboard .contain .paterns .grid__paterns1 a{
+    border: #bd5800 solid 3px !important;
+}
+
+body.dark-mode .container__dashboard .contain .btnChoice .categorySame,
+body.dark-mode .container__dashboard .contain .btnChoice .allPaterns{
+    border: #bd5800 solid 3px !important;
+}
+
+body.dark-mode .container__dashboard .contain .btnChoice .active{
+    background-color: #bd5800 !important;
+}
+
 
 
 body.dark-mode .container__dashboard .contain .paterns .grid__paterns1 .patern:hover{
