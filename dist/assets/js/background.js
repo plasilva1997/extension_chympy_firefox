@@ -1,15 +1,14 @@
 /*POUR LE DOM DE LA PAGE*/
 
-const urlAPI="https://chympy.net/api/";
+const urlAPI = "https://chympy.net/api/";
 
 
+function get_firefox_value() {
 
-function get_chrome_value() {
+    let currentURL = window.location.href; //recupere l'url de la page
 
-    let currentURL=window.location.href; //recupere l'url de la page
-
-    browser.storage.local.get(["company", "urlFirefox","token"], function (items) { //recupere les données stockées dans le local storage
-        if(items['token'] !== undefined) {
+    browser.storage.local.get(["company", "urlFirefox", "token"], function (items) { //recupere les données stockées dans le local storage
+        if (items['token'] !== undefined) {
 
             browser.runtime.sendMessage({
                 action: 'updateIcon',
@@ -27,17 +26,17 @@ function get_chrome_value() {
             } else {
                 browser.storage.local.set({urlFirefox: currentURL}, function () {
                 });//on stock l'url actuel
-                get_chrome_value();//fonction recurssive tant qu'on a pas l'url
+                get_firefox_value();//fonction recurssive tant qu'on a pas l'url
             }
-        }else{
+        } else {
             return;
         }
     });
 }
 
-get_chrome_value();
+get_firefox_value();
 
-function setBanner(company,url){
+function setBanner(company, url) {
 
     for (let k = 0; k < company.length; k++) { //parcours le tableau de la company
 
