@@ -33,7 +33,7 @@ Ouvrez un terminal dans le dossier du projet et tapez la commande suivante:
 
 ## Collaborateurs
 
-- [@Benjamin Plesant](https://github.com/Al-Namrood)
+- [@Benjamin Plesant](https://github.com/BenjaminPLESANT)
 - [@Antonin Girard](https://github.com/Antonin15-76)
 - [@Julien Mallet](https://github.com/Julien76140)
 - [@Paulo Silva](https://github.com/plasilva1997)
