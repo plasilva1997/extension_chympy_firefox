@@ -53,6 +53,7 @@ function login() {
             browser.storage.local.set({token_at: d.toString()}, function () {
             });
             getCompany();
+            getCategory();
         } else {
             errorMessageDiv.innerHTML = "Une erreur s'est produites veuillez rééssayer";
             loading.style.display = "none"; //cache le loader
@@ -103,6 +104,26 @@ function set_firefox_url() {
         } else { //sinon on stock une url par defaut
             set_firefox_url();
         }
+    });
+}
+
+function getCategory() {
+    browser.storage.local.get(["token"], function (items) {
+        token = items.token;
+        console.log(token, 'token')
+        let fetchCategorty = fetchApi("categorie/find", 'GET', token, '');
+
+        console.log(fetchCategorty)
+        fetchCategorty.then((data) => {
+            console.log(data, 'data ici')
+            if (data !== null && data !== undefined) {
+                browser.storage.local.set({category: JSON.stringify(data)}, function () {
+                });
+
+            } else {
+                console.log("Une erreur s'est produite lors de la recupération des catégories");
+            }
+        })
     });
 }
 

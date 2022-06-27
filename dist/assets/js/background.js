@@ -10,16 +10,16 @@ function get_firefox_value() {
     browser.storage.local.get(["company", "urlFirefox", "token"], function (items) { //recupere les données stockées dans le local storage
         if (items['token'] !== undefined) {
 
-            browser.runtime.sendMessage({
-                action: 'updateIcon',
-                value: false
-            });
-
-            browser.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
-                if (msg.action === "updateIcon") {
-                    browser.browserAction.setIcon({path: '/dist/assets/img/on.png'});
-                }
-            });
+            // browser.runtime.sendMessage({
+            //     action: 'updateIcon',
+            //     value: false
+            // });
+            //
+            // browser.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
+            //     if (msg.action === "updateIcon") {
+            //         browser.browserAction.setIcon({path: '/dist/assets/img/on.png'});
+            //     }
+            // });
 
             if (items['urlFirefox'] !== null && items['urlFirefox'] !== undefined && currentURL === items['urlFirefox']) { //verifie si l'url de la page est la meme que celle stockée dans le local storage
                 setBanner(JSON.parse(items['company']), items['urlFirefox']); //appel de la fonction setBanner
