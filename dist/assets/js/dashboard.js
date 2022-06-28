@@ -1,20 +1,16 @@
-/*DASHBOARD DE LEXTENSION*/
-
-setTimeout(get_chrome_value, 250);
-
-let activeClass = document.getElementById("activeOne"); //on recupere la classe active
-activeClass.addEventListener("click", ActiveOne); //Ajoute la fonction au boutton submit
-// console.log("1 " + activeClass);
-
+setTimeout(get_firefox_value, 250);
+/**
+ * Récupère la valeur des classes activeOne, activeTwo, activeThree
+ * Et leur attribue un évènement qui appel une fonction au clique
+ */
+let activeClass = document.getElementById("activeOne");
+activeClass.addEventListener("click", ActiveOne);
 
 let activeClass2 = document.getElementById("activeTwo");
 activeClass2.addEventListener("click", ActiveTwo);
 
-
 let activeClass3 = document.getElementById("activeThree");
 activeClass3.addEventListener("click", ActiveThree);
-
-// console.log("3 " + activeClass3);
 
 
 function ActiveOne() {
@@ -24,6 +20,7 @@ function ActiveOne() {
     var grid1 = document.getElementById("grid__paterns1");
     var grid2 = document.getElementById("grid__paterns");
     var grid3 = document.getElementById("grid__new__paterns");
+
     element.classList.add("active"); // on ajoute la classe active a la grid 1
     oldElement2.classList.remove("active"); // on retire la classe active a la grid 2
     oldElement3.classList.remove("active"); // on retire la classe active a la grid 3
@@ -39,12 +36,12 @@ function ActiveTwo() {
     var grid1 = document.getElementById("grid__paterns1");
     var grid2 = document.getElementById("grid__paterns");
     var grid3 = document.getElementById("grid__new__paterns");
+
     element.classList.add("active");
     oldElement1.classList.remove("active");
     oldElement3.classList.remove("active"); // on retire la classe active a la grid 3
     grid1.classList.add("d-none"); // on ajoute la classe d'affichage a la grid 1
     grid2.classList.remove("d-none"); // on retire la classe d'affichage a la grid 2
-    console.log(grid2);
     grid3.classList.add("d-none"); // on ajoute la classe d'affichage a la grid 3
 
 }
@@ -56,6 +53,7 @@ function ActiveThree() {
     var grid1 = document.getElementById("grid__paterns1");
     var grid2 = document.getElementById("grid__paterns");
     var grid3 = document.getElementById("grid__new__paterns");
+
     element.classList.add("active");
     oldElement1.classList.remove("active");
     oldElement2.classList.remove("active");

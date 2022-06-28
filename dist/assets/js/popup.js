@@ -1,5 +1,3 @@
-/*POUR L'HTML DE L'EXETENSION */
-
 /**initiation des valeurs**/
 const urlAPI = "https://chympy.net/api/";
 let form = "";
@@ -8,32 +6,51 @@ let errorMessageDiv = "";
 
 init_extension();
 
+/**
+ * On récupère le token de connexion
+ * S'il y a un token, on redirige vers le dashboard
+ * Sinon on reste sur la page de connexion
+ */
 browser.storage.local.get(["token"], function (items) {
     let token = items.token;
     if (token !== null && token !== undefined) {
-        window.location.replace("./dashboard.html"); //redirige vers le dashboard si le token de connexion est toujours actif
+        window.location.replace("./dashboard.html");
     }
 });
 
-
+/**
+ * Récupère les données d'initialisation de l'extension
+ *
+ */
 function init_extension() {//recupere les infos de base pour l'extension
 
 
     let subimtAction = document.getElementById("submit");
     subimtAction.addEventListener("click", login); //Ajoute la fonction au boutton submit
 
-    form = document.querySelector("#form-login"); //Recupere le formulaire
-    loading = document.querySelector("#loading"); //Recupere le loader
-    errorMessageDiv = document.querySelector("#error-message");// recuper la div des erreurs
+    /**
+     * Récupère les valeur du formulaire, loading et erreur
+     */
+    form = document.querySelector("#form-login");
+    loading = document.querySelector("#loading");
+    errorMessageDiv = document.querySelector("#error-message");
 }
 
-
+/**
+ * Fonction de connexion
+ */
 function login() {
 
-    var login = document.getElementById("email").value; //recuperation de l'email
-    var password = document.getElementById("password").value; //recuperation du mot de passe
+    /**
+     * Récupère les valeurs des champs email et mot de passe
+     */
+    var login = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
 
-    fetch(urlAPI + "particuliers/login", { //requete avec les données
+    /**
+     * Requête POST pour la soumission du formulaire de connexion
+     */
+    fetch(urlAPI + "particuliers/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -42,54 +59,101 @@ function login() {
             email: login,
             password: password
         })
-    }).then(function (response) {
-        return response.json(); //recuperation du json
-    }).then(function (data) {
-        if (data['success'] !== false) {
-            form.style.display = "none"; //Cache le login si on est connecté
-            browser.storage.local.set({token: data['token']}, function () {
-            });
-            let d = new Date().getTime();
-            browser.storage.local.set({token_at: d.toString()}, function () {
-            });
-            getCompany();
-            getCategory();
-        } else {
-            errorMessageDiv.innerHTML = "Une erreur s'est produites veuillez rééssayer";
-            loading.style.display = "none"; //cache le loader
-        }
-    }).catch((error) => {
+    })
+        /**
+         * Récupère les données soumises au format JSON
+         */
+        .then(function (response) {
+            return response.json(); //recuperation du json
+        })
+
+        /**
+         * Si les informations de connexion sont correctes on
+         * -> cache le formulaire de connexion
+         * -> crée une valeur token en cache
+         * -> crée une valeur token_at en cache
+         * -> récupère la liste des entreprises
+         * -> récupère les catégories d'entreprises
+         *
+         * Sinon on affiche le message d'erreur
+         */
+        .then(function (data) {
+            if (data['success'] !== false) {
+
+                let d = new Date().getTime();
+                form.style.display = "none";
+
+                browser.storage.local.set({token: data['token']}, function () {
+                });
+                browser.storage.local.set({token_at: d.toString()}, function () {
+                });
+
+                getCompany();
+                getCategory();
+
+            } else {
+
+                errorMessageDiv.innerHTML = "Une erreur s'est produites veuillez rééssayer";
+
+                //cache le loader
+                loading.style.display = "none";
+            }
+        }).catch((error) => {
         errorMessageDiv.innerHTML = "Une erreur s'est produites veuillez rééssayer";
-        loading.style.display = "none"; //cache le loader
+        // cache le loader
+        loading.style.display = "none";
     });
 
-    loading.style.display = "flex"; //Affiche le loader
+    // affiche le loader
+    loading.style.display = "flex";
 }
 
-
+/**
+ * On récupère la liste des entreprises
+ */
 function getCompany() {
-
+    /**
+     * On récupère le token, si un token existe
+     */
     browser.storage.local.get(["token"], function (items) {
-
         token = items.token;
 
+        /**
+         * Si le token existe, on fait une requête GET pour récupèrer la liste des entreprises
+         */
         if (token !== null && token !== undefined) {
+
             fetch(urlAPI + "offres/find", { //requete avec les données
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                     "Autorization": "Bearer " + token
                 },
-            }).then(function (response) { //recuperation du json
-                return response.json();
-            }).then(function (data) {
-                browser.storage.local.set({company: JSON.stringify(data)}, function () {
+            })
+                /**
+                 * Récupèration des données au format JSON
+                 */
+                .then(function (response) {
+                    return response.json();
+                })
+                /**
+                 * On stock la liste des entreprises en cache
+                 * puis on redirige vers le dashboard
+                 */
+                .then(function (data) {
+                    browser.storage.local.set({company: JSON.stringify(data)}, function () {
+                    });
+                    window.location.replace("./dashboard.html");// redirection vers le dashboard
+                })
+                /**
+                 * Intércepte les erreurs
+                 * S'il y à des erreurs, affiche le message d'erreur
+                 */
+                .catch((error) => {
+                    errorMessageDiv.innerHTML = "Une erreur s'est produites veuillez rééssayer";
+                    //cache le loader
+                    loading.style.display = "none";
                 });
-                window.location.replace("./dashboard.html");// redirection vers le dashboard
-            }).catch((error) => { //si il y a une erreur on redirige vers la page d'accueil
-                errorMessageDiv.innerHTML = "Une erreur s'est produites veuillez rééssayer";
-                loading.style.display = "none"; //cache le loader
-            });
         }
     });
 }
@@ -97,29 +161,41 @@ function getCompany() {
 set_firefox_url();
 
 function set_firefox_url() {
-    browser.tabs.query({active: true, lastFocusedWindow: true}, tabs => { //recupere l'url de la page actuelle
-        if (tabs[0].url !== null && tabs[0].url !== undefined) { //si il y a une url
+    /**
+     * Récupère l'URL de la page actuelle de notre navigateur
+     */
+    browser.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
+        /**
+         * S'il y à une URL, on stock l'URL actuelle
+         * sinon on stock une URL par défaut
+         */
+        if (tabs[0].url !== null && tabs[0].url !== undefined) {
             browser.storage.local.set({urlFirefox: tabs[0].url}, function () {
-            });//on stock l'url actuel
-        } else { //sinon on stock une url par defaut
+            });
+        } else {
             set_firefox_url();
         }
     });
 }
 
 function getCategory() {
+    /**
+     * Récupère le token en cache
+     */
     browser.storage.local.get(["token"], function (items) {
         token = items.token;
-        console.log(token, 'token')
-        let fetchCategorty = fetchApi("categorie/find", 'GET', token, '');
 
-        console.log(fetchCategorty)
-        fetchCategorty.then((data) => {
-            console.log(data, 'data ici')
+        // On appel la fonction fetchAPI pour faire une requête GET de la liste des catégories
+        let fetchCategory = fetchApi("categorie/find", 'GET', token, '');
+
+        /**
+         * S'il y à des catégories requêtée, on les stock en cache avec la valeur category
+         * Sinon on console.log un message d'erreur
+         */
+        fetchCategory.then((data) => {
             if (data !== null && data !== undefined) {
                 browser.storage.local.set({category: JSON.stringify(data)}, function () {
                 });
-
             } else {
                 console.log("Une erreur s'est produite lors de la recupération des catégories");
             }
