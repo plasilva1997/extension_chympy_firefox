@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 :root{
     --color-primary: #FD9F57;
 }
@@ -152,7 +159,6 @@ a{
     display: none;
     position: absolute;
     z-index: 1;
-    background-color: rgb(255 255 255);
 }
 .item{
     display: -ms-grid;
@@ -265,9 +271,9 @@ a{
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
     width: 90%;
     margin-top: 125px;
 }
@@ -520,7 +526,7 @@ a{
     align-items: start;
 }
 
-.nav2{
+.navBarNav{
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -532,7 +538,7 @@ a{
     -ms-flex-align: start;
     align-items: start;
     gap: 10px;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 @-webkit-keyframes isOpen {
@@ -582,12 +588,13 @@ a{
 }
 
 #infosPhone{
+    font-size: 10px;
     width: 50%;
 }
 
-.imgCommerce{
-    width: 100%;
-    height: 125px;
+.imgCommerce {
+    width: 60%;
+    height: 100px;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -716,6 +723,20 @@ body.dark-mode .container__dashboard .contain .paterns .grid__paterns .patern{
     background-color: transparent !important;
 }
 
+body.dark-mode .container__dashboard .contain .paterns .grid__paterns1 a{
+    border: #bd5800 solid 3px !important;
+}
+
+body.dark-mode .container__dashboard .contain .btnChoice .categorySame,
+body.dark-mode .container__dashboard .contain .btnChoice .allPaterns{
+    border: #bd5800 solid 3px !important;
+}
+
+body.dark-mode .container__dashboard .contain .btnChoice .active{
+    background-color: #bd5800 !important;
+}
+
+
 
 body.dark-mode .container__dashboard .contain .paterns .grid__paterns1 .patern:hover{
     background-color: #bd5800 !important;
@@ -768,3 +789,29 @@ body.dark-mode .form p {
     color: #fff;
 }
 
+div#horaires p {
+    font-size: 12px;
+}
+
+#choiceCategory{
+    margin-top: 25px;
+    width: 100%;
+
+}
+#choiceCategory select{
+    font-size: .9rem;
+    padding: 5px 5px;
+    color: black;
+    border: #bd5800 2px solid;
+    border-radius: 5px;
+    width: 50%;
+}
+
+body.dark-mode .container__dashboard .contain #choiceCategory select{
+    font-size: .9rem;
+    padding: 5px 5px;
+    color: white;
+    background-color: #bd5800;
+    border-radius: 5px;
+    width: 50%;
+}

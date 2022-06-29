@@ -1,57 +1,76 @@
-/*Notification*/
+function notification(onCheck) {
 
-function notification(onCheck){
+    /**
+     * Récupère les valeurs token et les entreprises dans le cache
+     */
+    browser.storage.local.get(["token", "company"], function (items) {
 
-    console.log("notfi");
-    browser.storage.local.get(["token","company"], function(items) {
+        token = items.token;
 
-            token = items.token;
+        /**
+         * S'il y à un token ET une entreprise
+         * fait une requête GET pour récupérer les données de l'API intermédiaire
+         */
+        if (token !== null && token !== undefined && items.company !== null && items.company !== undefined) {
 
-            if (token !== null && token !== undefined && items.company !== null && items.company !== undefined) {
+            // compte le nombre d'entreprises
+            let countCurrentCompany = JSON.parse(items["company"]).length;
 
-
-                let countCurrentCompany = JSON.parse(items["company"]).length;
-
-                fetch("https://api-chympy.plasilva.com/", { //requete avec les données
-                    method: "GET",
-                    /*headers: {
-                         "Content-Type": "application/json",
-                         "Autorization": "Bearer "+token
-                     },*/
-                }).then(function (response) { //recuperation du json
+            fetch("https://api-chympy.plasilva.com/", {
+                method: "GET",
+                /*headers: {
+                     "Content-Type": "application/json",
+                     "Autorization": "Bearer "+token
+                 },*/
+            })
+                /**
+                 * Récupère les données  du JSON
+                 */
+                .then(function (response) {
                     return response.json();
+                })
 
-                }).then(function (data) {
-                    console.log(countCurrentCompany)
-                    console.log(data.length)
+                /**
+                 * Compare le nombre d'entreprises en cache avec celle de l'api
+                 * Si le nombre est différent, on met à jours les entreprises en cache
+                 * et envoie une notification sur
+                 */
+                .then(function (data) {
 
-                    if (countCurrentCompany !== data.length) {
+                    if (countCurrentCompany !== data.length && data.length - countCurrentCompany > 0) {
                         browser.browserAction.setBadgeText({
                             text: (data.length - countCurrentCompany).toString()
                         });
-                    } else {
+                    }
+                    if (onCheck) {
                         browser.browserAction.setBadgeText({
                             text: ""
                         });
-
                     }
 
-                    if(onCheck){
-                        browser.storage.local.set({company: JSON.stringify(data)}, function() {});
-                    }
+                    browser.storage.local.set({company: JSON.stringify(data)}, function () {
+                    });
 
-                }).catch((error) => { //si il y a une erreur on redirige vers la page d'accueil
-                    console.log(error)
+                })
+                /**
+                 * Intercèpte les erreurs, s'il y en à, on redirige vers la page d'accueil
+                 */
+                .catch((error) => {
+                    console.log(error);
                 });
-            } else {
-                browser.browserAction.setBadgeText({
-                    text: ""
-                });
-            }
-        });
+        } else {
+            browser.browserAction.setBadgeText({
+                text: ""
+            });
+        }
+    });
 
-    setTimeout(notification,5000);//check nouvelles offre toutes les heures
+    /**
+     * Relance la requête pour comparer le nombres d'entreprises toutes les heures
+     */
+    setTimeout(notification, 10000000000);
 
 }
+
 
 notification(false);
