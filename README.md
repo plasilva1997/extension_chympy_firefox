@@ -55,5 +55,5 @@ Ouvrez un terminal dans le dossier du projet et tapez la commande suivante:
 
 ## Extension Chromium
 
-Une version a aussi été mise au point pour les navigateurs basé sur chromium [voici le lien GitHub](https://github.com/plasilva1997/extension_chympy_chrome).
+Une version a aussi été mise au point pour les navigateurs basé sur chromium [voici le lien GitHub](https://github.com/plasilva1997/extension_chympy-chrome).
 
