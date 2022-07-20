@@ -212,12 +212,12 @@ function loadstoreselected(e) {
 }
 
 
-function get_chrome_value() {
+function get_firefox_value() {
     browser.storage.local.get(["company", "urlFirefox", "token", "token_at", "category"], function (items) { //recuperation des données de l'extension
         if (items['urlFirefox'] !== null && items['urlFirefox'] !== undefined) { //si le site web existe
             setInformationCompany(JSON.parse(items['company']), items['urlFirefox'], items['token_at'], JSON.parse(items["category"])); //affichage des informations
         } else {
-            get_chrome_value();//fonction recurssive tant qu'on a pas l'url
+            get_firefox_value();//fonction recurssive tant qu'on a pas l'url
         }
     });
 
