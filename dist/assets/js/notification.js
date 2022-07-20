@@ -16,12 +16,9 @@ function notification(onCheck) {
             // compte le nombre d'entreprises
             let countCurrentCompany = JSON.parse(items["company"]).length;
 
-            fetch("https://api-chympy.plasilva.com/", {
+            fetch("https://nfactory.hausplus.fr/api-chympy/", {
                 method: "GET",
-                /*headers: {
-                     "Content-Type": "application/json",
-                     "Autorization": "Bearer "+token
-                 },*/
+
             })
                 /**
                  * Récupère les données  du JSON
